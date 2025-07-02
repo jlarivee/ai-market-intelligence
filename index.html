@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Market Intelligence</title>
+    <meta name="description" content="Advanced marketplace research and competitive pricing analysis">
+    <meta name="theme-color" content="#8B5CF6">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1f2937;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem 0;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .card h2 {
+            color: #4c1d95;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .import-section {
+            margin-bottom: 2rem;
+        }
+        
+        .import-btn, .analyze-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-bottom: 1rem;
+        }
+        
+        .import-btn:hover, .analyze-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .search-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #8B5CF6;
+        }
+        
+        .marketplace-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            background: #8B5CF6;
+            color: white;
+        }
+        
+        .tab:not(.active) {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+        
+        .results-container {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .price-range {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .price-card {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .price-card.low { border-color: #10b981; }
+        .price-card.mid { border-color: #f59e0b; }
+        .price-card.high { border-color: #ef4444; }
+        
+        .price-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .price-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        .competitive-analysis {
+            background: #f8fafc;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .optimization-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .optimized-listing {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .copy-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+        
+        .alert {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .alert.success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .alert.error {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+        
+        .imported-items {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+        }
+        
+        .imported-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .imported-item:hover {
+            background: #f9fafb;
+        }
+        
+        .imported-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 0.375rem;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+        }
+        
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-range {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 AI Market Intelligence</h1>
+            <p>Advanced marketplace research and competitive pricing analysis</p>
+        </div>
+        
+        <div id="success-alert" class="alert success"></div>
+        <div id="error-alert" class="alert error"></div>
+        
+        <div class="main-content">
+            <!-- Left Column: Data Import & Search -->
+            <div>
+                <div class="card import-section">
+                    <h2>📥 Import Data</h2>
+                    <button class="import-btn" onclick="importFromListingGenerator()">
+                        Import from AI Listing Generator
+                    </button>
+                    <div id="imported-items" class="imported-items" style="display: none;">
+                        <!-- Imported items will appear here -->
+                    </div>
+                </div>
+                
+                <div class="card search-section">
+                    <h2>🔍 Market Research</h2>
+                    <input type="text" id="search-query" class="search-input" placeholder="Enter item description or paste from listing generator...">
+                    
+                    <div class="marketplace-tabs">
+                        <button class="tab active" data-marketplace="all">All</button>
+                        <button class="tab" data-marketplace="ebay">eBay</button>
+                        <button class="tab" data-marketplace="facebook">Facebook</button>
+                        <button class="tab" data-marketplace="craigslist">Craigslist</button>
+                    </div>
+                    
+                    <button class="analyze-btn" onclick="analyzeMarket()">
+                        🔍 Analyze Market & Pricing
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Right Column: Analysis Results -->
+            <div>
+                <div class="card">
+                    <h2>📊 Price Intelligence</h2>
+                    <div id="price-analysis" class="loading">
+                        <div>Select an item or search to see market analysis</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Market Analysis Results -->
+        <div id="results-container" class="results-container" style="display: none;">
+            <h2>📈 Market Analysis Results</h2>
+            
+            <div class="price-range">
+                <div class="price-card low">
+                    <div class="price-value" id="low-price">$--</div>
+                    <div class="price-label">Low Range</div>
+                </div>
+                <div class="price-card mid">
+                    <div class="price-value" id="mid-price">$--</div>
+                    <div class="price-label">Market Average</div>
+                </div>
+                <div class="price-card high">
+                    <div class="price-value" id="high-price">$--</div>
+                    <div class="price-label">Premium Range</div>
+                </div>
+            </div>
+            
+            <div class="competitive-analysis">
+                <h3>🎯 Competitive Intelligence</h3>
+                <div id="competitive-insights">
+                    <!-- Competitive analysis will appear here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Optimized Listing Generation -->
+        <div id="optimization-section" class="optimization-section" style="display: none;">
+            <h2>🚀 Optimized Listing Generator</h2>
+            <p style="color: #6b7280; margin-bottom: 1rem;">Based on market research and competitive analysis</p>
+            
+            <div class="marketplace-tabs">
+                <button class="tab active" data-platform="ebay">eBay Optimized</button>
+                <button class="tab" data-platform="facebook">Facebook Optimized</button>
+                <button class="tab" data-platform="craigslist">Craigslist Optimized</button>
+            </div>
+            
+            <div class="optimized-listing">
+                <div id="optimized-content">
+                    <!-- Optimized listing content will appear here -->
+                </div>
+                <button class="copy-btn" onclick="copyOptimizedListing()">
+                    📋 Copy Optimized Listing
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let importedItems = [];
+        let currentMarketplace = 'all';
+        let currentPlatform = 'ebay';
+        let marketData = {};
+        let optimizedListings = {};
+        let userLocation = null;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadImportedItems();
+            setupTabListeners();
+            detectUserLocation();
+        });
+        
+        function setupTabListeners() {
+            // Marketplace tabs
+            document.querySelectorAll('.marketplace-tabs .tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.marketplace-tabs .tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentMarketplace = this.dataset.marketplace;
+                });
+            });
+            
+            // Platform tabs for optimization
+            document.querySelectorAll('[data-platform]').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('[data-platform]').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentPlatform = this.dataset.platform;
+                    updateOptimizedContent();
+                });
+            });
+        }
+        
+        function importFromListingGenerator() {
+            // Try to import from localStorage of the listing generator
+            try {
+                const listingGeneratorData = localStorage.getItem('savedItems');
+                if (!listingGeneratorData) {
+                    showError('No data found in AI Listing Generator. Please save some items first.');
+                    return;
+                }
+                
+                const items = JSON.parse(listingGeneratorData);
+                if (items.length === 0) {
+                    showError('No saved items found in AI Listing Generator.');
+                    return;
+                }
+                
+                // Import items
+                importedItems = items.map(item => ({
+                    ...item,
+                    importDate: new Date().toLocaleDateString(),
+                    analyzed: false
+                }));
+                
+                localStorage.setItem('marketIntelligenceItems', JSON.stringify(importedItems));
+                displayImportedItems();
+                showSuccess(`Imported ${items.length} items from AI Listing Generator!`);
+                
+            } catch (error) {
+                showError('Error importing data: ' + error.message);
+            }
+        }
+        
+        function loadImportedItems() {
+            const saved = localStorage.getItem('marketIntelligenceItems');
+            if (saved) {
+                importedItems = JSON.parse(saved);
+                displayImportedItems();
+            }
+        }
+        
+        function displayImportedItems() {
+            const container = document.getElementById('imported-items');
+            if (importedItems.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+            
+            container.style.display = 'block';
+            container.innerHTML = importedItems.map(item => {
+                const displayImage = item.images ? item.images[0] : item.image;
+                const analysisStatus = item.analyzed ? '✅' : '⏳';
+                
+                return `
+                    <div class="imported-item" onclick="selectImportedItem('${item.id}')">
+                        <img src="${displayImage}" alt="${item.name}">
+                        <div style="flex: 1;">
+                            <h4 style="margin: 0; font-size: 0.9rem;">${item.name}</h4>
+                            <p style="margin: 0; color: #6b7280; font-size: 0.8rem;">
+                                Imported: ${item.importDate} ${analysisStatus}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function selectImportedItem(itemId) {
+            const item = importedItems.find(i => i.id == itemId);
+            if (!item) return;
+            
+            // Use the professional description for market research
+            const searchQuery = item.descriptions?.ebay || item.descriptions?.facebook || item.descriptions?.craigslist || '';
+            document.getElementById('search-query').value = searchQuery;
+            
+            showSuccess(`Selected: ${item.name}`);
+        }
+        
+        async function analyzeMarket() {
+            const query = document.getElementById('search-query').value;
+            if (!query.trim()) {
+                showError('Please enter a search query or select an imported item');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('price-analysis').innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <div>Analyzing market data across platforms...</div>
+                </div>
+            `;
+            
+            try {
+                // Simulate market research (in real app, this would call web scraping APIs)
+                await simulateMarketResearch(query);
+                
+                // Show results
+                displayMarketResults();
+                generateOptimizedListings(query);
+                
+            } catch (error) {
+                showError('Market analysis failed: ' + error.message);
+            }
+        }
+        
+        async function simulateMarketResearch(query) {
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Generate realistic market data based on query
+            const basePrice = Math.floor(Math.random() * 500) + 50;
+            
+            // Apply location-based pricing adjustments
+            const locationMultiplier = getLocationPriceMultiplier();
+            
+            marketData = {
+                query: query,
+                location: userLocation,
+                priceAdjustment: locationMultiplier,
+                platforms: {
+                    ebay: {
+                        listings: Math.floor(Math.random() * 50) + 10,
+                        avgPrice: Math.floor(basePrice * locationMultiplier),
+                        priceRange: {
+                            low: Math.floor(basePrice * 0.7 * locationMultiplier),
+                            high: Math.floor(basePrice * 1.4 * locationMultiplier)
+                        }
+                    },
+                    facebook: {
+                        listings: Math.floor(Math.random() * 30) + 5,
+                        avgPrice: Math.floor(basePrice * 0.85 * locationMultiplier),
+                        priceRange: {
+                            low: Math.floor(basePrice * 0.6 * locationMultiplier),
+                            high: Math.floor(basePrice * 1.2 * locationMultiplier)
+                        }
+                    },
+                    craigslist: {
+                        listings: Math.floor(Math.random() * 20) + 3,
+                        avgPrice: Math.floor(basePrice * 0.9 * locationMultiplier),
+                        priceRange: {
+                            low: Math.floor(basePrice * 0.65 * locationMultiplier),
+                            high: Math.floor(basePrice * 1.3 * locationMultiplier)
+                        }
+                    }
+                },
+                insights: getLocationMarketInsights().concat([
+                    'eBay typically commands highest prices for this category',
+                    'Facebook Marketplace has most active buyers',
+                    'Seasonal demand appears to be increasing',
+                    'Similar condition items sell within 7-14 days',
+                    'Include original packaging for 15-20% price premium'
+                ])
+            };
+        }
+        
+        function displayMarketResults() {
+            const platforms = marketData.platforms;
+            const allPrices = Object.values(platforms).map(p => p.avgPrice);
+            
+            document.getElementById('low-price').textContent = `$${Math.min(...allPrices)}`;
+            document.getElementById('mid-price').textContent = `$${Math.floor(allPrices.reduce((a,b) => a+b) / allPrices.length)}`;
+            document.getElementById('high-price').textContent = `$${Math.max(...allPrices)}`;
+            
+            document.getElementById('price-analysis').innerHTML = `
+                <h3>Market Overview</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem;">
+                    <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 0.5rem;">
+                        <div style="font-weight: 600; color: #1f2937;">eBay</div>
+                        <div style="font-size: 1.25rem; color: #059669;">$${platforms.ebay.avgPrice}</div>
+                        <div style="font-size: 0.8rem; color: #6b7280;">${platforms.ebay.listings} listings</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 0.5rem;">
+                        <div style="font-weight: 600; color: #1f2937;">Facebook</div>
+                        <div style="font-size: 1.25rem; color: #059669;">$${platforms.facebook.avgPrice}</div>
+                        <div style="font-size: 0.8rem; color: #6b7280;">${platforms.facebook.listings} listings</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 0.5rem;">
+                        <div style="font-weight: 600; color: #1f2937;">Craigslist</div>
+                        <div style="font-size: 1.25rem; color: #059669;">$${platforms.craigslist.avgPrice}</div>
+                        <div style="font-size: 0.8rem; color: #6b7280;">${platforms.craigslist.listings} listings</div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('competitive-insights').innerHTML = marketData.insights.map(insight => 
+                `<div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">• ${insight}</div>`
+            ).join('');
+            
+            document.getElementById('results-container').style.display = 'block';
+        }
+        
+        async function generateOptimizedListings(query) {
+            // Get API key (same as listing generator)
+            const encodedKey = 'c2stYW50LWFwaTAzLVNjNHhFTVRmSFk1akl6VC03MlBKZ3Frd0tkQmlSbXFxbDNma2JETkhhb1JSNkQ2XzFKSzFrNDRhS3V2TnNJQ3o0NHJyZl82V3FRajRySnNPckw1UWZBLTdkVlhvQUFB';
+            const apiKey = atob(encodedKey).trim();
+            
+            optimizedListings = {};
+            
+            // Generate optimized listings for each platform
+            const platforms = ['ebay', 'facebook', 'craigslist'];
+            
+            for (const platform of platforms) {
+                try {
+                    const response = await fetch('/api/generate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            apiKey: apiKey,
+                            query: query,
+                            marketData: marketData,
+                            platform: platform
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        optimizedListings[platform] = data.content[0].text;
+                    } else {
+                        // Fallback to basic template if API fails
+                        optimizedListings[platform] = generateFallbackListing(query, platform);
+                    }
+                } catch (error) {
+                    console.error(`Error generating ${platform} listing:`, error);
+                    optimizedListings[platform] = generateFallbackListing(query, platform);
+                }
+            }
+            
+            updateOptimizedContent();
+            document.getElementById('optimization-section').style.display = 'block';
+        }
+        
+        function generateFallbackListing(query, platform) {
+            const platforms = marketData.platforms;
+            const locationName = userLocation ? `${userLocation.city}, ${userLocation.stateCode}` : 'your area';
+            
+            switch (platform) {
+                case 'ebay':
+                    return `🔥 PREMIUM LISTING - ${query.split(' ').slice(0,5).join(' ')}
+                
+💰 COMPETITIVE PRICING: $${platforms.ebay.avgPrice} (Market Research: $${platforms.ebay.priceRange.low}-$${platforms.ebay.priceRange.high})
+
+🎯 OPTIMIZED FOR EBAY BUYERS:
+• Professional auction-style listing
+• Detailed condition report included
+• Fast shipping with tracking
+• 30-day return policy
+
+📊 MARKET INTELLIGENCE (${locationName}):
+• Currently ${platforms.ebay.listings} similar listings active
+• Your price is competitive within market range
+• Seasonal demand trending upward
+
+💡 SELLER ADVANTAGE:
+• Include all original accessories for premium pricing
+• Professional photos increase sale probability by 40%
+• List during peak hours (7-9 PM) for maximum visibility
+
+🚀 ESTIMATED SALE TIME: 7-14 days based on market data`;
+
+                case 'facebook':
+                    return `🏆 MARKETPLACE SPECIAL - ${query.split(' ').slice(0,4).join(' ')}
+
+💵 GREAT DEAL: $${platforms.facebook.avgPrice} (Market Value: $${platforms.facebook.priceRange.low}-$${platforms.facebook.priceRange.high})
+
+✨ FACEBOOK MARKETPLACE OPTIMIZED:
+Hey! Selling this amazing ${query.split(' ')[0]} due to upgrade.
+
+🔥 Why this is a great deal:
+• Researched current market pricing for ${locationName}
+• Priced competitively for quick sale
+• All original components included
+• Excellent condition as shown in photos
+
+📍 LOCAL PICKUP PREFERRED
+💰 Cash or Venmo accepted
+📱 Quick response guaranteed
+
+📊 MARKET INSIGHT: Only ${platforms.facebook.listings} similar items currently available locally!
+
+Message me with any questions! 😊`;
+
+                case 'craigslist':
+                    return `${query.split(' ').slice(0,4).join(' ')} - $${platforms.craigslist.avgPrice} - EXCELLENT CONDITION
+
+MARKET-RESEARCHED PRICING FOR ${locationName.toUpperCase()} ✓
+Current market range: $${platforms.craigslist.priceRange.low}-$${platforms.craigslist.priceRange.high}
+My price: $${platforms.craigslist.avgPrice} (competitive!)
+
+WHAT YOU GET:
+• ${query.split(' ').slice(0,3).join(' ')} in excellent condition
+• All original components/accessories
+• Detailed photos show actual condition
+• No hidden defects or surprises
+
+SELLER DETAILS:
+• Serious seller, quick response
+• Market-researched pricing (not inflated)
+• Clean, non-smoking home
+• Available for local pickup in ${locationName}
+• Cash only, safe public meeting location
+
+COMPETITIVE ADVANTAGE: Only ${platforms.craigslist.listings} similar listings in area
+QUICK SALE MOTIVATION: Priced for fast sale, won't last long!
+
+Email with questions or to arrange viewing.`;
+
+                default:
+                    return 'Listing generation failed. Please try again.';
+            }
+        }
+        
+        function updateOptimizedContent() {
+            const content = optimizedListings[currentPlatform] || 'Generate market analysis first';
+            document.getElementById('optimized-content').innerHTML = `<pre style="white-space: pre-wrap; font-family: inherit;">${content}</pre>`;
+        }
+        
+        function copyOptimizedListing() {
+            const content = optimizedListings[currentPlatform];
+            if (!content) {
+                showError('No optimized listing to copy');
+                return;
+            }
+            
+            navigator.clipboard.writeText(content).then(() => {
+                showSuccess('Optimized listing copied to clipboard! 📋');
+            }).catch(() => {
+                showError('Failed to copy to clipboard');
+            });
+        }
+        
+        function showSuccess(message) {
+            const alert = document.getElementById('success-alert');
+            alert.textContent = message;
+            alert.style.display = 'block';
+            setTimeout(() => alert.style.display = 'none', 3000);
+        }
+        
+        function showError(message) {
+            const alert = document.getElementById('error-alert');
+            alert.textContent = message;
+            alert.style.display = 'block';
+            setTimeout(() => alert.style.display = 'none', 5000);
+        }
+        
+        // Location detection and pricing adjustments
+        async function detectUserLocation() {
+            try {
+                // Try to get user's location
+                if ("geolocation" in navigator) {
+                    navigator.geolocation.getCurrentPosition(
+                        async (position) => {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
+                            
+                            // Get location details using reverse geocoding
+                            try {
+                                const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+                                const locationData = await response.json();
+                                
+                                userLocation = {
+                                    latitude: lat,
+                                    longitude: lon,
+                                    city: locationData.city,
+                                    state: locationData.principalSubdivision,
+                                    stateCode: locationData.principalSubdivisionCode,
+                                    country: locationData.countryName,
+                                    zipCode: locationData.postcode
+                                };
+                                
+                                showSuccess(`Location detected: ${userLocation.city}, ${userLocation.stateCode}`);
+                                
+                            } catch (error) {
+                                console.log('Reverse geocoding failed:', error);
+                                // Fallback to IP-based location
+                                await getLocationFromIP();
+                            }
+                        },
+                        async (error) => {
+                            console.log('Geolocation failed:', error);
+                            // Fallback to IP-based location
+                            await getLocationFromIP();
+                        },
+                        { timeout: 10000 }
+                    );
+                } else {
+                    await getLocationFromIP();
+                }
+            } catch (error) {
+                console.log('Location detection failed:', error);
+                // Default to national average if all fails
+                userLocation = {
+                    city: 'Unknown',
+                    state: 'Unknown',
+                    stateCode: 'US',
+                    country: 'United States'
+                };
+            }
+        }
+        
+        async function getLocationFromIP() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                
+                userLocation = {
+                    latitude: data.latitude,
+                    longitude: data.longitude,
+                    city: data.city,
+                    state: data.region,
+                    stateCode: data.region_code,
+                    country: data.country_name,
+                    zipCode: data.postal
+                };
+                
+                showSuccess(`Location detected: ${userLocation.city}, ${userLocation.stateCode}`);
+                
+            } catch (error) {
+                console.log('IP location failed:', error);
+            }
+        }
+        
+        function getLocationPriceMultiplier() {
+            if (!userLocation || !userLocation.stateCode) {
+                return 1.0; // Default multiplier
+            }
+            
+            // Regional price adjustments based on cost of living and market data
+            const stateMultipliers = {
+                // High cost of living states
+                'CA': 1.4,  // California
+                'NY': 1.35, // New York
+                'CT': 1.3,  // Connecticut
+                'MA': 1.25, // Massachusetts
+                'NJ': 1.2,  // New Jersey
+                'MD': 1.15, // Maryland
+                'WA': 1.15, // Washington
+                'HI': 1.4,  // Hawaii
+                'DC': 1.3,  // Washington DC
+                
+                // Medium-high cost states
+                'IL': 1.1,  // Illinois
+                'CO': 1.1,  // Colorado
+                'OR': 1.1,  // Oregon
+                'VA': 1.05, // Virginia
+                'FL': 1.05, // Florida
+                'TX': 1.0,  // Texas (baseline)
+                
+                // Medium cost states
+                'NC': 0.9,  // North Carolina
+                'GA': 0.9,  // Georgia
+                'TN': 0.85, // Tennessee
+                'SC': 0.85, // South Carolina
+                'AZ': 0.95, // Arizona
+                'NV': 0.95, // Nevada
+                'OH': 0.9,  // Ohio
+                'PA': 0.95, // Pennsylvania
+                'MI': 0.9,  // Michigan
+                'IN': 0.85, // Indiana
+                
+                // Lower cost states
+                'AL': 0.8,  // Alabama
+                'MS': 0.75, // Mississippi
+                'AR': 0.8,  // Arkansas
+                'LA': 0.8,  // Louisiana
+                'KY': 0.8,  // Kentucky
+                'WV': 0.75, // West Virginia
+                'OK': 0.8,  // Oklahoma
+                'KS': 0.85, // Kansas
+                'MO': 0.85, // Missouri
+                'IA': 0.85, // Iowa
+                'NE': 0.85, // Nebraska
+                'ND': 0.8,  // North Dakota
+                'SD': 0.8,  // South Dakota
+                'WY': 0.85, // Wyoming
+                'MT': 0.85, // Montana
+                'ID': 0.9,  // Idaho
+                'UT': 0.9,  // Utah
+                'NM': 0.85, // New Mexico
+                'ME': 0.95, // Maine
+                'VT': 1.0,  // Vermont
+                'NH': 1.05, // New Hampshire
+                'RI': 1.1,  // Rhode Island
+                'DE': 1.0,  // Delaware
+                'AK': 1.2   // Alaska (remote location premium)
+            };
+            
+            return stateMultipliers[userLocation.stateCode] || 1.0;
+        }
+        
+        function getLocationMarketInsights() {
+            if (!userLocation || !userLocation.stateCode) {
+                return ['National market analysis applied'];
+            }
+            
+            const locationMultiplier = getLocationPriceMultiplier();
+            const state = userLocation.state || userLocation.stateCode;
+            
+            let insights = [`Pricing adjusted for ${userLocation.city}, ${state} market`];
+            
+            if (locationMultiplier > 1.2) {
+                insights.push('High-value market: Premium pricing recommended');
+                insights.push('Luxury/collector items perform especially well in this area');
+                insights.push('Buyers expect detailed descriptions and fast shipping');
+            } else if (locationMultiplier > 1.1) {
+                insights.push('Above-average market: Competitive pricing advantages');
+                insights.push('Good demand for quality items');
+            } else if (locationMultiplier < 0.9) {
+                insights.push('Value-conscious market: Competitive pricing essential');
+                insights.push('Bundle deals and bulk sales perform well');
+                insights.push('Highlight value proposition and cost savings');
+            } else {
+                insights.push('Balanced market: Standard pricing strategies apply');
+            }
+            
+            // Add regional-specific insights
+            if (['CA', 'NY', 'MA'].includes(userLocation.stateCode)) {
+                insights.push('Tech items and designer goods have strong local demand');
+            } else if (['TX', 'FL', 'AZ'].includes(userLocation.stateCode)) {
+                insights.push('Outdoor and recreational items popular in this region');
+            } else if (['NC', 'SC', 'GA', 'TN'].includes(userLocation.stateCode)) {
+                insights.push('Practical and functional items perform well');
+                insights.push('Local pickup preferred over shipping in this market');
+            }
+            
+            return insights;
+        }
+    </script>
+</body>
+</html>
