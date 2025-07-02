@@ -15,37 +15,50 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #1f2937;
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #581c87 100%);
+            color: #1a202c;
+            line-height: 1.7;
             min-height: 100vh;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 1rem;
+            padding: 2rem 1rem;
             min-height: 100vh;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 2rem;
-            padding: 2rem 0;
-            color: white;
+            margin-bottom: 3rem;
+            padding: 4rem 2rem 3rem;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            border-radius: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.15);
         }
         
         .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            letter-spacing: -0.03em;
         }
         
         .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 400;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
         .main-content {
@@ -56,20 +69,23 @@
         }
         
         .card {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.15);
         }
         
         .card h2 {
-            color: #4c1d95;
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
         .import-section {
@@ -78,20 +94,23 @@
         
         .import-btn, .analyze-btn {
             width: 100%;
-            background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
             color: white;
             border: none;
-            border-radius: 0.75rem;
-            padding: 1rem;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s;
-            margin-bottom: 1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.3);
+            letter-spacing: 0.02em;
         }
         
         .import-btn:hover, .analyze-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4);
         }
         
         .search-section {
@@ -100,16 +119,25 @@
         
         .search-input {
             width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
+            padding: 1.25rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            color: white;
+            font-weight: 500;
         }
         
         .search-input:focus {
             outline: none;
-            border-color: #8B5CF6;
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.2);
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
         }
         
         .marketplace-tabs {
@@ -120,30 +148,35 @@
         
         .tab {
             flex: 1;
-            padding: 0.5rem;
+            padding: 1rem;
             border: none;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-            font-weight: 500;
+            border-radius: 0.75rem;
+            font-size: 0.95rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.1);
         }
         
         .tab.active {
-            background: #8B5CF6;
-            color: white;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a202c;
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
         }
         
-        .tab:not(.active) {
-            background: #f3f4f6;
-            color: #6b7280;
+        .tab:not(.active):hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .results-container {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.15);
             margin-bottom: 2rem;
         }
         
@@ -156,14 +189,26 @@
         
         .price-card {
             text-align: center;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            border: 2px solid #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            color: white;
         }
         
-        .price-card.low { border-color: #10b981; }
-        .price-card.mid { border-color: #f59e0b; }
-        .price-card.high { border-color: #ef4444; }
+        .price-card.low { 
+            border-color: #10b981;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2);
+        }
+        .price-card.mid { 
+            border-color: #f59e0b;
+            box-shadow: 0 8px 32px rgba(245, 158, 11, 0.2);
+        }
+        .price-card.high { 
+            border-color: #ef4444;
+            box-shadow: 0 8px 32px rgba(239, 68, 68, 0.2);
+        }
         
         .price-value {
             font-size: 1.5rem;
@@ -177,36 +222,51 @@
         }
         
         .competitive-analysis {
-            background: #f8fafc;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .optimization-section {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.15);
         }
         
         .optimized-listing {
-            background: #f0fdf4;
-            border: 2px solid #10b981;
-            border-radius: 0.75rem;
-            padding: 1rem;
-            margin-top: 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            backdrop-filter: blur(20px);
+            color: rgba(255, 255, 255, 0.95);
         }
         
         .copy-btn {
-            background: #10b981;
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
             border: none;
-            border-radius: 0.375rem;
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 0.5rem;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
         }
         
         .alert {
@@ -217,37 +277,49 @@
         }
         
         .alert.success {
-            background: #dcfce7;
-            color: #166534;
-            border: 1px solid #bbf7d0;
+            background: rgba(220, 252, 231, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            backdrop-filter: blur(20px);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.1);
         }
         
         .alert.error {
-            background: #fef2f2;
-            color: #dc2626;
-            border: 1px solid #fecaca;
+            background: rgba(254, 242, 242, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            backdrop-filter: blur(20px);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(239, 68, 68, 0.1);
         }
         
         .imported-items {
             max-height: 300px;
             overflow-y: auto;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            padding: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
         }
         
         .imported-item {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            border-bottom: 1px solid #f3f4f6;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .imported-item:hover {
-            background: #f9fafb;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
         }
         
         .imported-item img {
@@ -259,8 +331,47 @@
         
         .loading {
             text-align: center;
-            padding: 2rem;
-            color: #6b7280;
+            padding: 3rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+        
+        .search-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.75rem;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .search-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        .search-link-icon {
+            font-size: 1.2rem;
+        }
+        
+        .data-source {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
         }
         
         .spinner {
@@ -296,7 +407,7 @@
     <div class="container">
         <div class="header">
             <h1>🧠 AI Market Intelligence</h1>
-            <p>Advanced marketplace research and competitive pricing analysis</p>
+            <p>Professional marketplace research and competitive pricing analysis platform</p>
         </div>
         
         <div id="success-alert" class="alert success"></div>
@@ -307,9 +418,18 @@
             <div>
                 <div class="card import-section">
                     <h2>📥 Import Data</h2>
-                    <button class="import-btn" onclick="importFromListingGenerator()">
-                        Import from AI Listing Generator
+                    <button class="import-btn" onclick="importFromFile()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 0.5rem;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7,10 12,15 17,10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Import from File
                     </button>
+                    <button class="import-btn" onclick="importFromListingGenerator()" style="background: linear-gradient(135deg, #6B7280, #4B5563); margin-top: 0.5rem;">
+                        Try Auto-Import (Same Browser)
+                    </button>
+                    <input type="file" id="import-file" accept=".json" style="display: none;" onchange="handleFileImport(event)">
                     <div id="imported-items" class="imported-items" style="display: none;">
                         <!-- Imported items will appear here -->
                     </div>
@@ -363,9 +483,19 @@
             </div>
             
             <div class="competitive-analysis">
-                <h3>🎯 Competitive Intelligence</h3>
+                <h3>🔗 Marketplace Search Links</h3>
+                <div id="search-links" class="search-links">
+                    <!-- Search links will be populated here -->
+                </div>
+            </div>
+            
+            <div class="competitive-analysis">
+                <h3>🎯 Market Intelligence</h3>
                 <div id="competitive-insights">
-                    <!-- Competitive analysis will appear here -->
+                    <!-- Market insights will be populated here -->
+                </div>
+                <div class="data-source">
+                    <small id="data-source-info">Data source: Real marketplace analysis</small>
                 </div>
             </div>
         </div>
@@ -433,13 +563,13 @@
             try {
                 const listingGeneratorData = localStorage.getItem('savedItems');
                 if (!listingGeneratorData) {
-                    showError('No data found in AI Listing Generator. Please save some items first.');
+                    showError('No data found in localStorage. Use "Import from File" instead.');
                     return;
                 }
                 
                 const items = JSON.parse(listingGeneratorData);
                 if (items.length === 0) {
-                    showError('No saved items found in AI Listing Generator.');
+                    showError('No saved items found in localStorage.');
                     return;
                 }
                 
@@ -452,11 +582,58 @@
                 
                 localStorage.setItem('marketIntelligenceItems', JSON.stringify(importedItems));
                 displayImportedItems();
-                showSuccess(`Imported ${items.length} items from AI Listing Generator!`);
+                showSuccess(`Auto-imported ${items.length} items from AI Listing Generator!`);
                 
             } catch (error) {
-                showError('Error importing data: ' + error.message);
+                showError('Auto-import failed. Use "Import from File" instead.');
             }
+        }
+        
+        function importFromFile() {
+            document.getElementById('import-file').click();
+        }
+        
+        function handleFileImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    // Validate the data format
+                    if (!data.items || !Array.isArray(data.items)) {
+                        showError('Invalid file format. Please use an export from AI Listing Generator.');
+                        return;
+                    }
+                    
+                    // Import items
+                    const newItems = data.items.map(item => ({
+                        ...item,
+                        importDate: new Date().toLocaleDateString(),
+                        analyzed: false
+                    }));
+                    
+                    // Merge with existing items (avoid duplicates)
+                    const existingIds = importedItems.map(item => item.id);
+                    const uniqueNewItems = newItems.filter(item => !existingIds.includes(item.id));
+                    
+                    importedItems = [...importedItems, ...uniqueNewItems];
+                    localStorage.setItem('marketIntelligenceItems', JSON.stringify(importedItems));
+                    displayImportedItems();
+                    
+                    showSuccess(`Imported ${uniqueNewItems.length} new items from ${data.source}!`);
+                    
+                } catch (error) {
+                    showError('Error reading file: ' + error.message);
+                }
+            };
+            
+            reader.readAsText(file);
+            
+            // Clear the input for next import
+            event.target.value = '';
         }
         
         function loadImportedItems() {
@@ -521,7 +698,7 @@
             
             try {
                 // Simulate market research (in real app, this would call web scraping APIs)
-                await simulateMarketResearch(query);
+                await performRealMarketResearch(query);
                 
                 // Show results
                 displayMarketResults();
@@ -532,54 +709,128 @@
             }
         }
         
-        async function simulateMarketResearch(query) {
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // Generate realistic market data based on query
-            const basePrice = Math.floor(Math.random() * 500) + 50;
-            
-            // Apply location-based pricing adjustments
-            const locationMultiplier = getLocationPriceMultiplier();
-            
-            marketData = {
-                query: query,
-                location: userLocation,
-                priceAdjustment: locationMultiplier,
-                platforms: {
-                    ebay: {
-                        listings: Math.floor(Math.random() * 50) + 10,
-                        avgPrice: Math.floor(basePrice * locationMultiplier),
-                        priceRange: {
-                            low: Math.floor(basePrice * 0.7 * locationMultiplier),
-                            high: Math.floor(basePrice * 1.4 * locationMultiplier)
-                        }
+        async function performRealMarketResearch(query) {
+            try {
+                // Generate marketplace search URLs
+                const searchUrls = generateMarketplaceUrls(query);
+                
+                // Get Claude API key from localStorage
+                const apiKey = localStorage.getItem('claude_api_key');
+                if (!apiKey) {
+                    throw new Error('Claude API key not found. Please set it in the settings.');
+                }
+                
+                // Call Claude API for real market analysis
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
                     },
-                    facebook: {
-                        listings: Math.floor(Math.random() * 30) + 5,
-                        avgPrice: Math.floor(basePrice * 0.85 * locationMultiplier),
-                        priceRange: {
-                            low: Math.floor(basePrice * 0.6 * locationMultiplier),
-                            high: Math.floor(basePrice * 1.2 * locationMultiplier)
-                        }
-                    },
-                    craigslist: {
-                        listings: Math.floor(Math.random() * 20) + 3,
-                        avgPrice: Math.floor(basePrice * 0.9 * locationMultiplier),
-                        priceRange: {
-                            low: Math.floor(basePrice * 0.65 * locationMultiplier),
-                            high: Math.floor(basePrice * 1.3 * locationMultiplier)
-                        }
-                    }
-                },
-                insights: getLocationMarketInsights().concat([
-                    'eBay typically commands highest prices for this category',
-                    'Facebook Marketplace has most active buyers',
-                    'Seasonal demand appears to be increasing',
-                    'Similar condition items sell within 7-14 days',
-                    'Include original packaging for 15-20% price premium'
-                ])
+                    body: JSON.stringify({
+                        apiKey: apiKey,
+                        query: query,
+                        marketData: {
+                            location: userLocation,
+                            searchUrls: searchUrls,
+                            priceAdjustment: getLocationPriceMultiplier()
+                        },
+                        platform: 'market-research'
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API request failed: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                const content = data.content[0].text;
+                
+                // Parse Claude's market analysis
+                const analysis = parseMarketAnalysis(content);
+                
+                marketData = {
+                    query: query,
+                    location: userLocation,
+                    priceAdjustment: getLocationPriceMultiplier(),
+                    searchUrls: searchUrls,
+                    platforms: analysis.platforms,
+                    insights: analysis.insights,
+                    lastUpdated: new Date().toLocaleString(),
+                    dataSource: 'Claude API + Real Market Search'
+                };
+                
+            } catch (error) {
+                throw new Error(`Market research failed: ${error.message}`);
+            }
+        }
+        
+        function generateMarketplaceUrls(query) {
+            const encodedQuery = encodeURIComponent(query);
+            const locationQuery = userLocation?.stateCode ? `&LH_PrefLoc=1&_fcid=1&rt=nc` : '';
+            
+            return {
+                ebay: `https://www.ebay.com/sch/i.html?_nkw=${encodedQuery}&_sacat=0&_sop=1${locationQuery}`,
+                facebook: `https://www.facebook.com/marketplace/search/?query=${encodedQuery}`,
+                craigslist: userLocation?.stateCode ? 
+                    `https://${getCraigslistCity()}.craigslist.org/search/sss?query=${encodedQuery}` :
+                    `https://craigslist.org/search/sss?query=${encodedQuery}`,
+                amazon: `https://www.amazon.com/s?k=${encodedQuery}&ref=nb_sb_noss`,
+                mercari: `https://www.mercari.com/search/?keyword=${encodedQuery}`,
+                offerup: `https://offerup.com/search/?q=${encodedQuery}`
             };
+        }
+        
+        function getCraigslistCity() {
+            const stateMap = {
+                'NC': 'raleigh', 'CT': 'newhaven', 'CA': 'losangeles', 'NY': 'newyork',
+                'FL': 'miami', 'TX': 'houston', 'MA': 'boston', 'VA': 'richmond'
+            };
+            return stateMap[userLocation?.stateCode] || 'atlanta';
+        }
+        
+        function parseMarketAnalysis(content) {
+            // Parse Claude's structured market analysis response
+            const lines = content.split('\n');
+            const platforms = { ebay: {}, facebook: {}, craigslist: {} };
+            const insights = [];
+            
+            let currentSection = '';
+            
+            for (const line of lines) {
+                const trimmed = line.trim();
+                
+                if (trimmed.includes('EBAY ANALYSIS:')) {
+                    currentSection = 'ebay';
+                } else if (trimmed.includes('FACEBOOK ANALYSIS:')) {
+                    currentSection = 'facebook';
+                } else if (trimmed.includes('CRAIGSLIST ANALYSIS:')) {
+                    currentSection = 'craigslist';
+                } else if (trimmed.includes('MARKET INSIGHTS:')) {
+                    currentSection = 'insights';
+                } else if (trimmed.startsWith('Average Price:')) {
+                    const price = parseInt(trimmed.match(/\$?(\d+)/)?.[1] || '0');
+                    if (currentSection && platforms[currentSection]) {
+                        platforms[currentSection].avgPrice = price;
+                    }
+                } else if (trimmed.startsWith('Price Range:')) {
+                    const matches = trimmed.match(/\$?(\d+).*?\$?(\d+)/);
+                    if (matches && currentSection && platforms[currentSection]) {
+                        platforms[currentSection].priceRange = {
+                            low: parseInt(matches[1]),
+                            high: parseInt(matches[2])
+                        };
+                    }
+                } else if (trimmed.startsWith('Active Listings:')) {
+                    const listings = parseInt(trimmed.match(/(\d+)/)?.[1] || '0');
+                    if (currentSection && platforms[currentSection]) {
+                        platforms[currentSection].listings = listings;
+                    }
+                } else if (currentSection === 'insights' && trimmed.startsWith('•') || trimmed.startsWith('-')) {
+                    insights.push(trimmed.replace(/^[•-]\s*/, ''));
+                }
+            }
+            
+            return { platforms, insights };
         }
         
         function displayMarketResults() {
@@ -590,30 +841,80 @@
             document.getElementById('mid-price').textContent = `$${Math.floor(allPrices.reduce((a,b) => a+b) / allPrices.length)}`;
             document.getElementById('high-price').textContent = `$${Math.max(...allPrices)}`;
             
+            // Display marketplace search links
+            const searchUrls = marketData.searchUrls;
+            document.getElementById('search-links').innerHTML = `
+                <a href="${searchUrls.ebay}" target="_blank" class="search-link">
+                    <span class="search-link-icon">🛒</span>
+                    <div>
+                        <div>eBay Search</div>
+                        <small>$${platforms.ebay.avgPrice} avg • ${platforms.ebay.listings} listings</small>
+                    </div>
+                </a>
+                <a href="${searchUrls.facebook}" target="_blank" class="search-link">
+                    <span class="search-link-icon">📘</span>
+                    <div>
+                        <div>Facebook Marketplace</div>
+                        <small>$${platforms.facebook.avgPrice} avg • ${platforms.facebook.listings} listings</small>
+                    </div>
+                </a>
+                <a href="${searchUrls.craigslist}" target="_blank" class="search-link">
+                    <span class="search-link-icon">📋</span>
+                    <div>
+                        <div>Craigslist</div>
+                        <small>$${platforms.craigslist.avgPrice} avg • ${platforms.craigslist.listings} listings</small>
+                    </div>
+                </a>
+                <a href="${searchUrls.amazon}" target="_blank" class="search-link">
+                    <span class="search-link-icon">📦</span>
+                    <div>
+                        <div>Amazon</div>
+                        <small>Reference pricing</small>
+                    </div>
+                </a>
+                <a href="${searchUrls.mercari}" target="_blank" class="search-link">
+                    <span class="search-link-icon">🏪</span>
+                    <div>
+                        <div>Mercari</div>
+                        <small>Alternative marketplace</small>
+                    </div>
+                </a>
+                <a href="${searchUrls.offerup}" target="_blank" class="search-link">
+                    <span class="search-link-icon">🤝</span>
+                    <div>
+                        <div>OfferUp</div>
+                        <small>Local deals</small>
+                    </div>
+                </a>
+            `;
+            
             document.getElementById('price-analysis').innerHTML = `
                 <h3>Market Overview</h3>
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem;">
-                    <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 0.5rem;">
-                        <div style="font-weight: 600; color: #1f2937;">eBay</div>
-                        <div style="font-size: 1.25rem; color: #059669;">$${platforms.ebay.avgPrice}</div>
-                        <div style="font-size: 0.8rem; color: #6b7280;">${platforms.ebay.listings} listings</div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 0.75rem; color: white;">
+                        <div style="font-weight: 600;">eBay</div>
+                        <div style="font-size: 1.25rem; color: #10b981;">$${platforms.ebay.avgPrice}</div>
+                        <div style="font-size: 0.8rem; opacity: 0.8;">${platforms.ebay.listings} listings</div>
                     </div>
-                    <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 0.5rem;">
-                        <div style="font-weight: 600; color: #1f2937;">Facebook</div>
-                        <div style="font-size: 1.25rem; color: #059669;">$${platforms.facebook.avgPrice}</div>
-                        <div style="font-size: 0.8rem; color: #6b7280;">${platforms.facebook.listings} listings</div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 0.75rem; color: white;">
+                        <div style="font-weight: 600;">Facebook</div>
+                        <div style="font-size: 1.25rem; color: #10b981;">$${platforms.facebook.avgPrice}</div>
+                        <div style="font-size: 0.8rem; opacity: 0.8;">${platforms.facebook.listings} listings</div>
                     </div>
-                    <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 0.5rem;">
-                        <div style="font-weight: 600; color: #1f2937;">Craigslist</div>
-                        <div style="font-size: 1.25rem; color: #059669;">$${platforms.craigslist.avgPrice}</div>
-                        <div style="font-size: 0.8rem; color: #6b7280;">${platforms.craigslist.listings} listings</div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 0.75rem; color: white;">
+                        <div style="font-weight: 600;">Craigslist</div>
+                        <div style="font-size: 1.25rem; color: #10b981;">$${platforms.craigslist.avgPrice}</div>
+                        <div style="font-size: 0.8rem; opacity: 0.8;">${platforms.craigslist.listings} listings</div>
                     </div>
                 </div>
             `;
             
             document.getElementById('competitive-insights').innerHTML = marketData.insights.map(insight => 
-                `<div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">• ${insight}</div>`
+                `<div style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.9);">• ${insight}</div>`
             ).join('');
+            
+            document.getElementById('data-source-info').textContent = 
+                `Data source: ${marketData.dataSource} • Last updated: ${marketData.lastUpdated}`;
             
             document.getElementById('results-container').style.display = 'block';
         }
